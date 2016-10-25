@@ -157,8 +157,9 @@ int main()
 
 
                      cout << begA1Str;
-                     if (used1 > 0)
-                     {
+                   //if (used1 > 0)
+                     if (used1 <= 0) goto endI6;
+  beginI6://         {
                         hopPtr1 = a1;
                         endPtr1 = a1 + used1;
                         do
@@ -167,7 +168,7 @@ int main()
                            ++hopPtr1;
                         }
                         while (hopPtr1 < endPtr1);
-                     }
+  endI6://           }
                      cout << endl;
 
                      cout << commA2Str;
