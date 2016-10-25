@@ -122,8 +122,9 @@ int main()
                          //while (hopPtr2 < endPtr2)
                            goto WTest4;
   beginW4://               {
-                              if (*hopPtr2 >= target)
-                              {
+                            //if (*hopPtr2 >= target)
+                              if (*hopPtr2 < target) goto elseI5;
+  beginI5://                  {
                                  hopPtr21 = endPtr2;
                                  while (hopPtr21 > hopPtr2)
                                  {
@@ -132,11 +133,13 @@ int main()
                                  }
                                //break;
                                  goto xitW4;
-                              }
-                              else
-                              {
+                            //}
+                              goto endI5;
+                            //else
+  elseI5://                   {
                                  ++hopPtr2;
-                              }
+  endI5://                    }
+
   endW4://                 }
   WTest4:                  if(hopPtr2 < endPtr2) goto beginW4;
   xitW4:
