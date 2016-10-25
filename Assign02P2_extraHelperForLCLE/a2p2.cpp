@@ -179,12 +179,14 @@ int main()
   beginI7://         {
                         hopPtr2 = a2;
                         endPtr2 = a2 + used2;
-                        do
-                        {
+                      //do
+  beginDW2://           {
                            cout << *hopPtr2 << ' ' << ' ';
                            ++hopPtr2;
-                        }
-                        while (hopPtr2 < endPtr2);
+  endDW2://             }
+                      //while (hopPtr2 < endPtr2);
+  DWTest2:              if(hopPtr2 < endPtr2) goto beginDW2;
+  
   endI7://           }
                      cout << endl;
 
