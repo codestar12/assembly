@@ -103,9 +103,10 @@ int main()
                             //}
                             //else
   elseI4://                   {
+                               //break;
                                  goto xitW3;
   endI4://                    }
-  
+
   endW3://                 }
   WTest3:                  if(hopPtr3 >= endPtr3) goto beginW3;
   xitW3:
@@ -118,8 +119,9 @@ int main()
   elseI3://              {
                            hopPtr2 = a2;
                            endPtr2 = a2 + used2;
-                           while (hopPtr2 < endPtr2)
-                           {
+                         //while (hopPtr2 < endPtr2)
+                           goto WTest4;
+  beginW4://               {
                               if (*hopPtr2 >= target)
                               {
                                  hopPtr21 = endPtr2;
@@ -128,13 +130,16 @@ int main()
                                     *hopPtr21 = *(hopPtr21 - 1);
                                     --hopPtr21;
                                  }
-                                 break;
+                               //break;
+                                 goto xitW4;
                               }
                               else
                               {
                                  ++hopPtr2;
                               }
-                           }
+  endW4://                 }
+  WTest4:                  if(hopPtr2 < endPtr2) goto beginW4;
+  xitW4:
                            *hopPtr2 = target;
                            ++used2;
   endI3://              }
