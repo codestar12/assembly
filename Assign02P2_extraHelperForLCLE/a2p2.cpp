@@ -287,12 +287,13 @@ int main()
   beginI12://        {
                         hopPtr1 = a1;
                         endPtr1 = a1 + used1;
-                        do
-                        {
+                      //do
+  beginDW4://           {
                            cout << *hopPtr1 << ' ' << ' ';
                            ++hopPtr1;
-                        }
-                        while (hopPtr1 < endPtr1);
+                      //}
+                      //while (hopPtr1 < endPtr1);
+                        if(hopPtr1 < endPtr1) goto beginDW4;
   endI12://          }
                      cout << endl;
 
