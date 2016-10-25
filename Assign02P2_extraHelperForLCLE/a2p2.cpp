@@ -55,7 +55,7 @@ int main()
                      ++hopPtr1;
                   //if (used1 < 12)
                     if(used1 >= 12) goto elseI1;
-  beginI1://        {
+//                  {
                         cout << emiStr;
                         cin >> reply;
                      goto endI1;
@@ -76,7 +76,7 @@ int main()
                   cout << endl;
 
                   if (used1 <= 0) goto endI2;
- beginI2://       {
+                //{
                      total = 0;
                    //for (hopPtr1 = a1, endPtr1 = a1 + used1; hopPtr1 < endPtr1; ++hopPtr1)
 
@@ -96,7 +96,7 @@ int main()
   beginW3://               {
                             //if (*hopPtr3 > target)
                               if (*hopPtr3 <= target) goto elseI4;
-  beginI4://                  {
+                            //{
                                  *(hopPtr3 + 1) = *hopPtr3;
                                  --hopPtr3;
                                  goto endI4;
@@ -124,7 +124,7 @@ int main()
   beginW4://               {
                             //if (*hopPtr2 >= target)
                               if (*hopPtr2 < target) goto elseI5;
-  beginI5://                  {
+                            //{
                                  hopPtr21 = endPtr2;
                                //while (hopPtr21 > hopPtr2)
                                  goto WTest5;
@@ -159,7 +159,7 @@ int main()
                      cout << begA1Str;
                    //if (used1 > 0)
                      if (used1 <= 0) goto endI6;
-  beginI6://         {
+                   //{
                         hopPtr1 = a1;
                         endPtr1 = a1 + used1;
                       //do
@@ -176,7 +176,7 @@ int main()
                      cout << commA2Str;
                    //if (used2 > 0)
                      if (used2 <=0) goto endI7;
-  beginI7://         {
+                   //{
                         hopPtr2 = a2;
                         endPtr2 = a2 + used2;
                       //do
@@ -193,7 +193,7 @@ int main()
                      cout << commA3Str;
                    //if (used3 > 0)
                      if (used3 <= 0) goto endI8;
-  beginI8://         {
+                   //{
                         hopPtr3 = a3;
                         endPtr3 = a3 + used3;
                       //do
@@ -216,7 +216,7 @@ int main()
   beginW6://         {
                       //if (*hopPtr2 < *hopPtr3)
                         if (*hopPtr2 >= *hopPtr3) goto elseI9;
-  beginI9://            {
+                      //{
                            *hopPtr1 = *hopPtr2;
                            ++hopPtr2;
                       //}
@@ -260,7 +260,7 @@ int main()
                         target = *hopPtr1;
                       //if (target < mean)
                         if (target >= mean) goto elseI10;
-  beginI10://           {
+                      //{
                            *hopPtr2 = target;
                            ++used2;
                            ++hopPtr2;
@@ -270,7 +270,7 @@ int main()
   elseI10://            {
                          //if (target > mean)
                            if (target <= mean) goto endI11;
-  beginI11://              {
+                         //{
                               *hopPtr3 = target;
                               ++used3;
                               ++hopPtr3;
@@ -284,7 +284,7 @@ int main()
                      cout << procA1Str;
                    //if (used1 > 0)
                      if (used1 <= 0) goto endI12;
-  beginI12://        {
+                   //{
                         hopPtr1 = a1;
                         endPtr1 = a1 + used1;
                       //do
@@ -329,18 +329,18 @@ int main()
                         if(hopPtr3 < endPtr3) goto beginDW6;
   endI14://          }
                      cout << endl;
- endI2://         }
+  endI2://        }
 
                   cout << endl;
                   cout << dacStr;
                   cin >> reply;
                   cout << endl;
-endW1://       }
-WTest1:
+  endW1://     }
+  WTest1:
                ///if (reply != 'n' && reply != 'N') goto begW1;
                if (reply == 'n') goto xitW1;
                if (reply != 'N') goto beginW1;
-xitW1:
+  xitW1:
 
                cout << endl;
                cout << dlStr << '\n';
