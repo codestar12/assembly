@@ -186,13 +186,14 @@ int main()
   endDW2://             }
                       //while (hopPtr2 < endPtr2);
   DWTest2:              if(hopPtr2 < endPtr2) goto beginDW2;
-  
+
   endI7://           }
                      cout << endl;
 
                      cout << commA3Str;
-                     if (used3 > 0)
-                     {
+                   //if (used3 > 0)
+                     if (used3 <= 0) goto endI8;
+  beginI8://         {
                         hopPtr3 = a3;
                         endPtr3 = a3 + used3;
                         do
@@ -201,7 +202,7 @@ int main()
                            ++hopPtr3;
                         }
                         while (hopPtr3 < endPtr3);
-                     }
+  endI8://           }
                      cout << endl;
 
                      hopPtr1 = a1;
