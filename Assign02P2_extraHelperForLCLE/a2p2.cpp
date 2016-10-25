@@ -214,16 +214,18 @@ int main()
                    //while (hopPtr2 < endPtr2 && hopPtr3 < endPtr3)
                      goto WTest6;
   beginW6://         {
-                        if (*hopPtr2 < *hopPtr3)
-                        {
+                      //if (*hopPtr2 < *hopPtr3)
+                        if (*hopPtr2 >= *hopPtr3) goto elseI9;
+  beginI9://            {
                            *hopPtr1 = *hopPtr2;
                            ++hopPtr2;
-                        }
-                        else
-                        {
+                      //}
+                           goto endI9;
+                      //else
+  elseI9://             {
                            *hopPtr1 = *hopPtr3;
                            ++hopPtr3;
-                        }
+  endI9://              }
                         ++hopPtr1;
   endW6://           }
   WTest6:            if(hopPtr2 < endPtr2)
