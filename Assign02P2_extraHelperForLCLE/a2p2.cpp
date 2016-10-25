@@ -91,8 +91,9 @@ int main()
                      //{
                            hopPtr3 = a3 + used3 - 1;
                            endPtr3 = a3;
-                           while (hopPtr3 >= endPtr3)
-                           {
+                         //while (hopPtr3 >= endPtr3)
+                           goto WTest3;
+  beginW3://               {
                               if (*hopPtr3 > target)
                               {
                                  *(hopPtr3 + 1) = *hopPtr3;
@@ -100,15 +101,18 @@ int main()
                               }
                               else
                               {
-                                 break;
+                                 goto xitW3;
                               }
-                           }
+  endW3://                 }
+  WTest3:                  if(hopPtr3 >= endPtr3) goto beginW3;
+  xitW3:
                            *(hopPtr3 + 1) = target;
                            ++used3;
                            goto endI3;
+  
                       //}
                       //else
-  elseI3://             {
+  elseI3://              {
                            hopPtr2 = a2;
                            endPtr2 = a2 + used2;
                            while (hopPtr2 < endPtr2)
