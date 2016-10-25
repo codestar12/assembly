@@ -94,15 +94,18 @@ int main()
                          //while (hopPtr3 >= endPtr3)
                            goto WTest3;
   beginW3://               {
-                              if (*hopPtr3 > target)
-                              {
+                            //if (*hopPtr3 > target)
+                              if (*hopPtr3 <= target) goto elseI4;
+  beginI4://                  {
                                  *(hopPtr3 + 1) = *hopPtr3;
                                  --hopPtr3;
-                              }
-                              else
-                              {
+                                 goto endI4;
+                            //}
+                            //else
+  elseI4://                   {
                                  goto xitW3;
-                              }
+  endI4://                    }
+  
   endW3://                 }
   WTest3:                  if(hopPtr3 >= endPtr3) goto beginW3;
   xitW3:
