@@ -258,21 +258,25 @@ int main()
                    //while (hopPtr1 < endPtr1)
   beginW9://         {
                         target = *hopPtr1;
-                        if (target < mean)
-                        {
+                      //if (target < mean)
+                        if (target >= mean) goto elseI10;
+  beginI10://           {
                            *hopPtr2 = target;
                            ++used2;
                            ++hopPtr2;
-                        }
-                        else
-                        {
-                           if (target > mean)
-                           {
+                      //}
+                           goto endI10;
+                      //else
+  elseI10://            {
+                         //if (target > mean)
+                           if (target <= mean) goto endI11;
+  beginI11://              {
                               *hopPtr3 = target;
                               ++used3;
                               ++hopPtr3;
-                           }
-                        }
+  endI11://                }
+  
+  endI10://             }
                         ++hopPtr1;
   endW9://           }
   Wtest9:            if(hopPtr1 < endPtr1) goto beginW9;
