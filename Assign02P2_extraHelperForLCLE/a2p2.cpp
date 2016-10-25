@@ -255,8 +255,8 @@ int main()
                      endPtr1 = a1 + used1;
                      used2 = 0;
                      used3 = 0;
-                     while (hopPtr1 < endPtr1)
-                     {
+                   //while (hopPtr1 < endPtr1)
+  beginW9://         {
                         target = *hopPtr1;
                         if (target < mean)
                         {
@@ -274,7 +274,8 @@ int main()
                            }
                         }
                         ++hopPtr1;
-                     }
+  endW9://           }
+  Wtest9:            if(hopPtr1 < endPtr1) goto beginW9;
 
                      cout << procA1Str;
                      if (used1 > 0)
