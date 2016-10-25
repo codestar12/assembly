@@ -310,22 +310,24 @@ int main()
                       //}
                       //while (hopPtr2 < endPtr2);
                         if(hopPtr2 < endPtr2) goto beginDW5;
-                        
+
   endI13://          }
                      cout << endl;
 
                      cout << commA3Str;
-                     if (used3 > 0)
-                     {
+                   //if (used3 > 0)
+                     if (used3 <= 0) goto endI14;
+                   //{
                         hopPtr3 = a3;
                         endPtr3 = a3 + used3;
-                        do
-                        {
+                      //do
+  beginDW6://           {
                            cout << *hopPtr3 << ' ' << ' ';
                            ++hopPtr3;
-                        }
-                        while (hopPtr3 < endPtr3);
-                     }
+                      //}
+                      //while (hopPtr3 < endPtr3);
+                        if(hopPtr3 < endPtr3) goto beginDW6;
+  endI14://          }
                      cout << endl;
  endI2://         }
 
