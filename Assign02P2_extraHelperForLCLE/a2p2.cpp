@@ -211,8 +211,9 @@ int main()
                      hopPtr3 = a3;
                      endPtr2 = a2 + used2;
                      endPtr3 = a3 + used3;
-                     while (hopPtr2 < endPtr2 && hopPtr3 < endPtr3)
-                     {
+                   //while (hopPtr2 < endPtr2 && hopPtr3 < endPtr3)
+                     goto WTest6;
+  beginW6://         {
                         if (*hopPtr2 < *hopPtr3)
                         {
                            *hopPtr1 = *hopPtr2;
@@ -224,7 +225,10 @@ int main()
                            ++hopPtr3;
                         }
                         ++hopPtr1;
-                     }
+  endW6://           }
+  WTest6:            if(hopPtr2 < endPtr2)
+                     if(hopPtr3 < endPtr3) goto beginW6;
+
                      while (hopPtr2 < endPtr2)
                      {
                         *hopPtr1 = *hopPtr2;
