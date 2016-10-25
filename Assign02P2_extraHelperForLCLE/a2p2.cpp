@@ -196,12 +196,13 @@ int main()
   beginI8://         {
                         hopPtr3 = a3;
                         endPtr3 = a3 + used3;
-                        do
-                        {
+                      //do
+  beginDW3://           {
                            cout << *hopPtr3 << ' ' << ' ';
                            ++hopPtr3;
-                        }
-                        while (hopPtr3 < endPtr3);
+  endDW3://             }
+                      //while (hopPtr3 < endPtr3);
+                        if(hopPtr3 < endPtr3) goto beginDW3;
   endI8://           }
                      cout << endl;
 
