@@ -298,17 +298,20 @@ int main()
                      cout << endl;
 
                      cout << commA2Str;
-                     if (used2 > 0)
-                     {
+                   //if (used2 > 0)
+                     if (used2 <= 0) goto endI13;
+                   //{
                         hopPtr2 = a2;
                         endPtr2 = a2 + used2;
-                        do
-                        {
+                      //do
+  beginDW5://           {
                            cout << *hopPtr2 << ' ' << ' ';
                            ++hopPtr2;
-                        }
-                        while (hopPtr2 < endPtr2);
-                     }
+                      //}
+                      //while (hopPtr2 < endPtr2);
+                        if(hopPtr2 < endPtr2) goto beginDW5;
+                        
+  endI13://          }
                      cout << endl;
 
                      cout << commA3Str;
