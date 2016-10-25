@@ -240,12 +240,14 @@ int main()
   endW7://           }
   WTest7:            if(hopPtr2 < endPtr2) goto beginW7;
 
-                     while (hopPtr3 < endPtr3)
-                     {
+                   //while (hopPtr3 < endPtr3)
+                     goto WTest8;
+  beginW8://         {
                         *hopPtr1 = *hopPtr3;
                         ++hopPtr3;
                         ++hopPtr1;
-                     }
+  endW8://           }
+  WTest8:            if(hopPtr3 < endPtr3) goto beginW8;
 
                      hopPtr1 = a1;
                      hopPtr2 = a2;
