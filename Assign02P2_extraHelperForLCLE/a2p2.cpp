@@ -162,18 +162,21 @@ int main()
   beginI6://         {
                         hopPtr1 = a1;
                         endPtr1 = a1 + used1;
-                        do
-                        {
+                      //do
+  beginDW1://           {
                            cout << *hopPtr1 << ' ' << ' ';
                            ++hopPtr1;
-                        }
-                        while (hopPtr1 < endPtr1);
+  endDW1://             }
+                      //while (hopPtr1 < endPtr1);
+  DWTest1:              if(hopPtr1 < endPtr1) goto beginDW1;
+
   endI6://           }
                      cout << endl;
 
                      cout << commA2Str;
-                     if (used2 > 0)
-                     {
+                   //if (used2 > 0)
+                     if (used2 <=0) goto endI7;
+  beginI7://         {
                         hopPtr2 = a2;
                         endPtr2 = a2 + used2;
                         do
@@ -182,7 +185,7 @@ int main()
                            ++hopPtr2;
                         }
                         while (hopPtr2 < endPtr2);
-                     }
+  endI7://           }
                      cout << endl;
 
                      cout << commA3Str;
