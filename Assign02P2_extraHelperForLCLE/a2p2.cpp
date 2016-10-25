@@ -275,15 +275,16 @@ int main()
                               ++used3;
                               ++hopPtr3;
   endI11://                }
-  
+
   endI10://             }
                         ++hopPtr1;
   endW9://           }
   Wtest9:            if(hopPtr1 < endPtr1) goto beginW9;
 
                      cout << procA1Str;
-                     if (used1 > 0)
-                     {
+                   //if (used1 > 0)
+                     if (used1 <= 0) goto endI12;
+  beginI12://        {
                         hopPtr1 = a1;
                         endPtr1 = a1 + used1;
                         do
@@ -292,7 +293,7 @@ int main()
                            ++hopPtr1;
                         }
                         while (hopPtr1 < endPtr1);
-                     }
+  endI12://          }
                      cout << endl;
 
                      cout << commA2Str;
