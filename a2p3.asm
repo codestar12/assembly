@@ -26,9 +26,9 @@
 #char byeStr[]    = "bye...";
 
                   .data
-a1:               .space 12
-a2:               .space 12
-a3:               .space 12
+a1:               .space 48 
+a2:               .space 48
+a3:               .space 48
 einStr:           .asciiz "Enter integer #"
 moStr:            .asciiz "Max of "
 ieStr:            .asciiz " ints entered..."
