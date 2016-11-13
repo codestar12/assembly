@@ -1,3 +1,7 @@
+// Cody Blakeney
+// CS 2318-1, Assignment 2 Part 2
+                
+
 #include <iostream>
 using namespace std;
 
@@ -78,7 +82,8 @@ int main()
                   if (used1 <= 0) goto endI2;
                 //{
                      total = 0;
-                   //for (hopPtr1 = a1, endPtr1 = a1 + used1; hopPtr1 < endPtr1; ++hopPtr1)
+                   //for (hopPtr1 = a1, endPtr1 = a1 + used1; hopPtr1 <
+                   //endPtr1; ++hopPtr1)
 
                      hopPtr1 = a1;
                      endPtr1 = a1 + used1;
