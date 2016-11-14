@@ -29,7 +29,7 @@ main:
 # 40($sp): inStr
 # 47($sp): slrStr
 # 75($sp): mStr
-# 104($sp): ieStr 
+# 108($sp): ieStr 
 ###################################
 			addiu $sp, $sp, -144 # Add 144 bytes to stack
 					     # 143 needed plus 1 for aligning
@@ -51,7 +51,6 @@ main:
 			sb $t0, 46($sp)
 
 			# load slrStr into stack
-		#	.asciiz "Allowed hi of 10 reached..."
 			li $t0, 'A'
 			sb $t0, 47($sp)
 			li $t0, 'l'
@@ -109,8 +108,78 @@ main:
 			li $t0, '\0'
 			sb $t0, 74($sp)
 
+			# load mStr into stack
+			li $t0, 'M'
+			sb $t0, 75($sp)
+			li $t0, 'o'
+			sb $t0, 76($sp)
+			li $t0, 'r'
+			sb $t0, 77($sp)
+			li $t0, 'e'
+			sb $t0, 78($sp)
+			li $t0, '?'
+			sb $t0, 79($sp)
+			li $t0, ' '
+			sb $t0, 80($sp)
+			li $t0, '('
+			sb $t0, 81($sp)
+			li $t0, 'n'
+			sb $t0, 82($sp)
+			li $t0, ' '
+			sb $t0, 83($sp)
+			li $t0, 'o'
+			sb $t0, 84($sp)
+			li $t0, 'r'
+			sb $t0, 85($sp)
+			li $t0, ' '
+			sb $t0, 86($sp)
+			li $t0, 'N'
+			sb $t0, 87($sp)
+			li $t0, ' '
+			sb $t0, 88($sp)
+			li $t0, '='
+			sb $t0, 89($sp)
+			li $t0, ' '
+			sb $t0, 90($sp)
+			li $t0, 'n'
+			sb $t0, 91($sp)
+			li $t0, 'o'
+			sb $t0, 92($sp)
+			li $t0, ','
+			sb $t0, 93($sp)
+			li $t0, ' '
+			sb $t0, 94($sp)
+			li $t0, 'o'
+			sb $t0, 95($sp)
+			li $t0, 't'
+			sb $t0, 96($sp)
+			li $t0, 'h'
+			sb $t0, 97($sp)
+			li $t0, 'e'
+			sb $t0, 98($sp)
+			li $t0, 'r'
+			sb $t0, 99($sp)
+			li $t0, ' '
+			sb $t0, 100($sp)
+			li $t0, '='
+			sb $t0, 101($sp)
+			li $t0, ' '
+			sb $t0, 102($sp)
+			li $t0, 'y'
+			sb $t0, 103($sp)
+			li $t0, 'e'
+			sb $t0, 104($sp)
+			li $t0, 's'
+			sb $t0, 105($sp)
+			li $t0, ')'
+			sb $t0, 106($sp)
+			li $t0, ' '
+			sb $t0, 107($sp)
+			li $t0, '\0'
+			sb $t0, 108($sp)
+
 			# test string
-			addi $a0, $sp, 47
+			addi $a0, $sp, 75
 			li $v0, 4
 			syscall
 
