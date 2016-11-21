@@ -1,3 +1,13 @@
+###############################################################################
+# Title: Assign03P1                   Author: Cody Blakeney
+# Class: CS 2318-001, Fall 2016       Submitted: Nov 15th 2016
+###############################################################################
+# Program: Make all necessary modifications to a3p1.asm of the supplied so that 
+#	   all variables used are local variables declared in the Stack Segment 
+#	   (not global variables declared in the Data Segment).
+###############################################################################
+
+
 			.data
 #iArr:			.space 40
 #inStr:			.asciiz "\nInt #"		# '\n' added to cover for syscall #12 drawback
@@ -29,7 +39,7 @@ main:
 # 40($sp): inStr
 # 47($sp): slrStr
 # 75($sp): mStr
-# 108($sp): ieStr 
+# 109($sp): ieStr 
 ###################################
 			addiu $sp, $sp, -144 # Add 144 bytes to stack
 					     # 143 needed plus 1 for aligning
@@ -178,10 +188,78 @@ main:
 			li $t0, '\0'
 			sb $t0, 108($sp)
 
-			# test string
-			addi $a0, $sp, 75
-			li $v0, 4
-			syscall
+			# load ieStr into stack
+			li $t0, ' '
+			sb $t0, 109($sp)
+			li $t0, 'i'
+			sb $t0, 110($sp)
+			li $t0, 'n'
+			sb $t0, 111($sp)
+			li $t0, 't'
+			sb $t0, 112($sp)
+			li $t0, 's'
+			sb $t0, 113($sp)
+			li $t0, ' '
+			sb $t0, 114($sp)
+			li $t0, 'e'
+			sb $t0, 115($sp)
+			li $t0, 'n'
+			sb $t0, 116($sp)
+			li $t0, 't'
+			sb $t0, 117($sp)
+			li $t0, 'e'
+			sb $t0, 118($sp)
+			li $t0, 'r'
+			sb $t0, 119($sp)
+			li $t0, 'e'
+			sb $t0, 120($sp)
+			li $t0, 'e'
+			sb $t0, 121($sp)
+			li $t0, 'd'
+			sb $t0, 122($sp)
+			li $t0, ','
+			sb $t0, 123($sp)
+			li $t0, ' '
+			sb $t0, 124($sp)
+			li $t0, 'o'
+			sb $t0, 125($sp)
+			li $t0, 'd'
+			sb $t0, 126($sp)
+			li $t0, 'd'
+			sb $t0, 127($sp)
+			li $t0, '-'
+			sb $t0, 128($sp)
+			li $t0, 'e'
+			sb $t0, 129($sp)
+			li $t0, 'v'
+			sb $t0, 130($sp)
+			li $t0, 'e'
+			sb $t0, 131($sp)
+			li $t0, 'n'
+			sb $t0, 132($sp)
+			li $t0, ' '
+			sb $t0, 133($sp)
+			li $t0, 'g'
+			sb $t0, 134($sp)
+			li $t0, 'r'
+			sb $t0, 135($sp)
+			li $t0, 'o'
+			sb $t0, 136($sp)
+			li $t0, 'u'
+			sb $t0, 137($sp)
+			li $t0, 'p'
+			sb $t0, 138($sp)
+			li $t0, 'e'
+			sb $t0, 139($sp)
+			li $t0, 'd'
+			sb $t0, 140($sp)
+			li $t0, ':'
+			sb $t0, 141($sp)
+			li $t0, ' '
+			sb $t0, 142($sp)
+			li $t0, '\0'
+			sb $t0, 143($sp)
+
 
 #                    int used = 0,
 #                        numEven = 0;
@@ -194,7 +272,7 @@ main:
 begDW1:
 #                       cout << inStr << (used + 1);
 			li $v0, 4
-#			la $a0, inStr
+			addiu $a0, $sp, 40 # load inStr
 			syscall
 			li $v0, 1
 			addi $a0, $v1, 1
@@ -229,6 +307,7 @@ begI2:
 #                          cout << slrStr << endl;
 			li $v0, 4
 #			la $a0, slrStr
+			addiu $a0, $sp, 47 # load address slrStr
 			syscall
 			li $v0, 11
 			li $a0, '\n'
@@ -240,6 +319,7 @@ elseI2:
 #                          cout << mStr;
 			li $v0, 4
 #			la $a0, mStr
+			addiu $a0, $sp, 75
 			syscall
 #                          cin >> reply;
 			li $v0, 12
@@ -262,6 +342,7 @@ begI3:
 			addi $t2, $a1, 4
 #                       endPtr2 = iArr + 9;
 #			la $a2, iArr
+			move $a2, $sp # load address of iArr
 			addi $a2, $a2, 36
 #                       //while (hopPtr2 < endPtr2)
 			j WTest1
@@ -281,6 +362,7 @@ WTest1:
 			addi $t2, $a1, 4
 #                       endPtr2 = iArr + 9;
 #			la $a2, iArr
+			move $a2, $sp # load address of iArr from stack
 			addi $a2, $a2, 36
 #                       //while (hopPtr2 <= endPtr2)
 			j WTest2
@@ -304,9 +386,11 @@ endI3:
 			syscall
 			li $v0, 4
 #			la $a0, ieStr
+			addiu $a0, $sp, 109 # load ieStr from stack
 			syscall
 #                    hopPtr1 = iArr;
 #			la $t1, iArr
+			move $t1, $sp # load iArr from stack
 #                    endPtr1 = hopPtr1 + used;
 			sll $a1, $v1, 2
 			add $a1, $a1, $t1
