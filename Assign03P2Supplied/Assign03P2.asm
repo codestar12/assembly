@@ -113,6 +113,10 @@ begWBodyM1:
 #      ValidateInt(&valsToDo, 1, 7, adjMsg);
 
 ####################(4)####################
+					addi $a0, $sp, 77 # add stack pointer plus 77 
+					li $a1, 1 # load min 1
+					li $a2, 7 # load max 7
+					addi $a3, $sp, 0 # load address of adjMsg (0)
 					jal ValidateInt
 #      for (i = valsToDo; i > 0; --i)
 					lw $t1, 77($sp)
@@ -123,12 +127,34 @@ begFBodyM1:
 					beqz $t0, ElseI1
 #            intArr[valsToDo - i] = GetOneIntByVal(entIntPrompt);
 
+					addi $a0, $sp, 41 # load address of entIntPrompt
+
+					jal GetOneIntByVal # jump to function
+
+					lw $a1, 77($sp) # load value of valsTodo
+					sub $a2, $a1, $t1 # set $a2 to valsToDo - i
+					sll $a2, $a2, 2 # multiply results by 4 for indexing
+					addi $a1, $sp, 81 # load address of intArr into $a1
+					add $a1, $a1, $a2 # add result from $a1 and $a2
+					sw $v0, 0($a1) #store result from GetOneIntByVal
+
 ####################(8)####################
 					
 					j endI1
 #         else // i is even
 ElseI1:
 #            GetOneIntByAddr(intArr + valsToDo - i, entIntPrompt);
+					
+					lw $a1, 77($sp) # load value of valsToDo
+					sub $a1, $a1, $t1 # subtract value of i from valsToDo
+					sll $a1, $a1, 2 # multiply results by 4 for indexing
+					addi $a2, $sp, 81 # load address of intArr
+					add $a0, $a1, $a2 # add intArr address with value and load into $a1 for function call
+					addi $a1, $sp, 41 # load address of entIntPrompt into $a0 for function
+
+					jal GetOneIntByAddr
+
+
 
 ####################(7)####################
 					
@@ -139,6 +165,10 @@ FTestM1:
 #      ShowIntArray(intArr, valsToDo, initLab);
 
 ####################(3)####################
+					addi $a0, $sp, 81
+					lw $a1, 77($sp)
+					addi $a2, $sp, 18
+
 					jal ShowIntArray
 					
 #      for (i = 0, j = valsToDo - 1; i < j; ++i, --j)
