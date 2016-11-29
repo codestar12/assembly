@@ -91,9 +91,9 @@ begI_m:
 					jal ShowArrayLabeled
 #                         mean = PopulateArray1223(a1, a2, a3, used1, &used2, &used3);
 					####################(10)####################
-					lw $a0, 192($sp)	# load a1
-					lw $a1, 240($sp)	# load a2
-					lw $a2, 288($sp)	# load a3
+					addi $a0, $sp, 192	# load a1
+					addi $a1, $sp, 240 	# load a2
+					addi $a2, $sp, 288	# load a3
 					lw $a3, 188($sp)	# load used1
 					addi $t0, $sp, 184	# load used2 pointer
 					sw $t0, 16($sp)		# save used2 pointer in stack for call
@@ -360,7 +360,8 @@ PopulateArray1223:
 #                   hopPtr1 = a1;
 					move $t1, $a0		# store a1 into hopPtr1
 #                   endPtr1 = a1 + used1;
-					add $t9, $a0, $a3 	# add a1 + used1 into endPtr1
+					sll $v1, $a3, 2		# multiply used1 by 4 for indexing
+					add $t9, $a0, $v1 	# add a1 + used1 into endPtr1
 #                   goto FTest_PA1223;
 					j FTest_PA1223
 begF_PA1223:
@@ -369,7 +370,7 @@ begF_PA1223:
 #                      total += target;
 					add $s0, $s0, $t0	# total plus equals target
 #                      if (target % 2 == 0) goto else_PA1223;
-					andi $v1, $t0, 2	# and target with to to check if even
+					andi $v1, $t0, 1	# and target with to to check if even
 					beqz $v1, else_PA1223   # if target was even jump to else_PA1223
 begI_PA1223:
 #                         PopulateArray1223AuxO(a3, used3Ptr, target);
