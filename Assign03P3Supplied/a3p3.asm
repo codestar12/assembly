@@ -345,9 +345,9 @@ PopulateArray1223:
 					
 					# BODY:
 
-					sw $a0, 0($fp)		# save $a0
-					sw $a1, 4($fp)		# save $a1
-					sw $a2, 8($fp)		# save $a2
+					sw $a0, 0($fp)		# save a1
+					sw $a1, 4($fp)		# save a2
+					sw $a2, 8($fp)		# save a3
 
 
 #                   *used2Ptr = 0;
@@ -365,19 +365,42 @@ PopulateArray1223:
 					j FTest_PA1223
 begF_PA1223:
 #                      target = *hopPtr1;
+					lw $t0, 0($t1)		# load value from hopPtr1
 #                      total += target;
+					add $s0, $s0, $t0	# total plus equals target
 #                      if (target % 2 == 0) goto else_PA1223;
+					andi $v1, $t0, 2	# and target with to to check if even
+					beqz $v1, else_PA1223   # if target was even jump to else_PA1223
 begI_PA1223:
 #                         PopulateArray1223AuxO(a3, used3Ptr, target);
 #                      goto endI_PA1223;
+					lw $a0, 8($fp)		# load a3 into first argument
+					lw $a1, 20($fp)		# load used3Ptr into 2nd argument
+					move $a2, $t0		# load target into 3rd argument
+					jal PopulateArray1223AuxO   # call PopulateArray1223
+					j endI_PA1223
 else_PA1223:
 #                         PopulateArray1223AuxE(a2, used2Ptr, target);
+					lw $a0, 4($fp)		# load a2 into first argument
+					lw $a1, 16($fp)		# load used2Ptr into 2nd argument
+					move $a2, $t0		# load target into 3rd argument
+					jal PopulateArray1223AuxE
 endI_PA1223:
 #                   ++hopPtr1;
+					addi $t1, $t1, 1	# hopPtr1++
 FTest_PA1223:
 #                   if (hopPtr1 < endPtr1) goto begF_PA1223;
+					blt $t1, $t9, begF_PA1223
 #                   return total/used1;
+					div $s0, $a3 
 					# EPILOG:
+					addiu $sp, $sp, -40
+					lw $ra, 36($sp)
+					lw $fp 32($fp)
+					lw $s0, 16($sp)
+					addiu $sp, $sp, 40
+					jr $ra
+
 #}
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
