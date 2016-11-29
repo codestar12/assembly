@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<!-- saved from url=(0067)http://cs.txstate.edu/~lk04/2318/Assign/Assign03P3_HelperNotes.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="icon" type="image/png" href="http://www.cs.txstate.edu/~lk04/MyFavicon4.png"><meta name="GENERATOR" content="Mozilla/4.8 [en] (Windows NT 5.0; U) [Netscape]"><meta name="Author" content="Lee S. Koh"></head>
+<body>
+<img src="./Assign03P3_HelperNotes_files/BannerLine1.gif">
+<hr><b><font size="+2">Assignment 3 Part 3 Helper Notes</font></b>
+<br>
+<hr>
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"><img src="./Assign03P3_HelperNotes_files/BulletL1_7x15.gif" height="15" width="7"></td>
+
+<td colspan="6" valign="top" width="98%"><b><font color="#000000"><font size="+1">Helper
+Note 3P3.1</font></font></b></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td style="background-color: rgb(223, 255, 96);" colspan="6" valign="top" width="98%">
+<hr align="left" size="1" width="100%"><font color="#000000">Experience with past students tells me that correctly understanding
+the meanings (semantics) of various <i>expressions involving pointers</i> is a common difficulty. <br>Below are some notes you may find
+helpful in that regard. <br><span style="text-decoration: underline;">NOTE</span>:&nbsp;</font><font color="#000000">You may not see/need all of these in this assignment.</font><hr align="left" size="1" width="100%"></td>
+</tr>
+</tbody></table><table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td colspan="6" valign="top" width="98%"><font color="#000000">If a function
+receives an </font><b><tt><font color="#cc0000">intPtr</font></tt></b><font color="#000000">
+(<i>i.e.</i>, the <i><u>address</u></i> of a <b><i>word of memory</i></b>
+on the stack), then</font></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%">
+<hr align="left" size="1" width="50%"></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%"><b><tt><font color="#cc0000">*intPtr
+= 0</font></tt></b><font color="#000000"> means to <i>put </i></font><b><tt><font color="#cc0000">0</font></tt></b><i><font color="#000000">
+in the <b>word of memory</b></font></i></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(need to do <b><tt><font color="#cc0000">sw</font></tt></b>
+using the <i><u>address</u></i>)</td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%">
+<hr align="left" size="1" width="50%"></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%"><b><tt><font color="#cc0000">i &lt;
+*intPtr</font></tt></b><font color="#000000"> means to <i>compare the value
+of </i></font><b><tt><font color="#cc0000">i</font></tt></b><i><font color="#000000">
+with the value currently contained in the <b>word of memory</b></font></i></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(need to do <b><tt><font color="#cc0000">lw</font></tt></b>
+using the <i><u>address</u></i>)</td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%">
+<hr align="left" size="1" width="50%"></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%"><b><tt><font color="#cc0000">++(*intPtr)</font></tt></b><font color="#000000">
+means to <i>make the value contained in the <b>word of memory</b> 1 more
+than what it currently is</i></font></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(has the same meaning as <b><tt><font color="#cc0000">*intPtr
+= *intPtr + 1</font></tt></b>)</td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(need to do <b><tt><font color="#cc0000">lw</font></tt></b>
+using the <i><u>address</u></i>, add <b><tt><font color="#cc0000">1</font></tt></b>
+to the loaded value, then do <b><tt><font color="#cc0000">sw</font></tt></b>
+using the <i><u>address</u></i>)</td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(see how it's used in&nbsp;<b><tt><font color="#006600">PopulateArray</font></tt></b>:
+how <b><tt><font color="#cc0000">++(*usedPtr)</font></tt></b> is done)</td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%">
+<hr align="left" size="1" width="50%"></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%"><b><tt><font color="#cc0000">--(*intPtr)</font></tt></b><font color="#000000">
+means to <i>make the value contained in the <b>word of memory</b> 1 less
+than what it currently is</i></font></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(has the same meaning as <b><tt><font color="#cc0000">*intPtr
+= *intPtr - 1</font></tt></b>)</td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(need to do <b><tt><font color="#cc0000">lw</font></tt></b>
+using the <i><u>address</u></i>, add <b><tt><font color="#cc0000">-1</font></tt></b>
+to the loaded value, then do <b><tt><font color="#cc0000">sw</font></tt></b>
+using the <i><u>address</u></i>)</td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%">
+<hr align="left" size="1" width="50%"></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%"><b><tt><font color="#cc0000">a2[*intPtr]
+= a1[i]</font></tt></b><font color="#000000"> means to <i>copy the value
+currently contained in the "element in array </i></font><b><tt><font color="#cc0000">a1</font></tt></b><i><font color="#000000">
+whose index is the value of </font></i><b><tt><font color="#cc0000">i</font></tt></b><i><font color="#000000">"
+into the "element in array </font></i><b><tt><font color="#cc0000">a2</font></tt></b><i><font color="#000000">
+whose index is the value currently contained in the <b>word of memory</b>"</font></i></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(need to do <b><tt><font color="#cc0000">lw</font></tt></b>
+to obtain <b><tt><font color="#cc0000">a1[i]</font></tt></b>, do another
+<b><tt><font color="#cc0000">lw</font></tt></b>
+using the <i><u>address</u></i> to obtain <b><tt><font color="#cc0000">*intPtr</font></tt></b>,
+then do
+<b><tt><font color="#cc0000">sw</font></tt></b> to put <b><tt><font color="#cc0000">a1[i]</font></tt></b>
+into <b><tt><font color="#cc0000">a2[*intPtr]</font></tt></b>)</td>
+</tr>
+</tbody></table>
+
+<table width="100%"><tbody><tr><td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%">
+<hr align="left" size="1" width="50%"></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td style="text-align: center;" colspan="5" valign="top" width="96%"><font color="#000000">(for&nbsp;this one,&nbsp;</font><b><tt><font color="#cc0000">usedPtr</font></tt></b><font color="#000000"> is&nbsp;</font><font color="#000000">the <i><u>address</u></i> of another <b><i>word of memory</i></b>
+on the stack</font><font color="#000000"> the function
+receives</font><font color="#000000">)</font><b><tt><font color="#cc0000"><br></font></tt></b><i><font color="#000000"></font></i></td>
+</tr>
+</tbody></table><table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%"><font color="#000000"></font><b><tt><font color="#cc0000">*(a2 + *usedPtr)
+= *intPtr</font></tt></b><font color="#000000"> means to <i>copy&nbsp;</i></font><i><font color="#000000">the value currently contained in the <b>word of memory</b></font></i><i><font color="#000000">
+into the "element in array </font></i><b><tt><font color="#cc0000">a2</font></tt></b><i><font color="#000000">
+with an offset that is the value currently contained in the memory location whose address is in </font></i><b><tt><font color="#cc0000">usedPtr</font></tt></b><i><font color="#000000">"</font></i><font color="#000000"></font></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(need to do <b><tt><font color="#cc0000">lw</font></tt></b>
+using the <i><u>address</u></i>
+to obtain&nbsp;<b><tt><font color="#cc0000">*intPtr</font></tt></b>, do another
+<b><tt><font color="#cc0000">lw</font></tt></b>
+using&nbsp;<b><tt><font color="#cc0000">usedPtr</font></tt></b><i><u></u></i> to obtain <b><tt><font color="#cc0000">*</font></tt></b><b><tt><font color="#cc0000">usedPtr</font></tt></b>,
+then do
+<b><tt><font color="#cc0000">sw</font></tt></b> to put&nbsp;<b><tt><font color="#cc0000">*intPtr</font></tt></b>
+into&nbsp;<b><tt><font color="#cc0000">*(a2 + *usedPtr)</font></tt></b><b><tt><font color="#cc0000"></font></tt></b>)</td>
+</tr>
+</tbody></table>
+
+
+
+<table width="100%"><tbody><tr><td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%">
+<hr align="left" size="1" width="50%"></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td style="text-align: center;" colspan="5" valign="top" width="96%"><font color="#000000">(for&nbsp;this one also,&nbsp;</font><b><tt><font color="#cc0000">usedPtr</font></tt></b><font color="#000000"> is&nbsp;</font><font color="#000000">the <i><u>address</u></i> of another <b><i>word of memory</i></b>
+on the stack</font><font color="#000000"> the function
+receives</font><font color="#000000">)</font><b><tt><font color="#cc0000"><br></font></tt></b></td>
+</tr>
+</tbody></table><table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%"><b><tt><font color="#cc0000">*(a2 + *usedPtr)
+= </font></tt></b><b><tt><font color="#cc0000">*(a1 + </font></tt></b><b><tt><font color="#cc0000">*intPtr)</font></tt></b><font color="#000000"> means to <i>copy&nbsp;</i></font><i><font color="#000000">the value currently contained</font></i><i><font color="#000000"> in the "element in array </font></i><b><tt><font color="#cc0000">a1</font></tt></b><i><font color="#000000">
+with an offset that is the value currently contained&nbsp;</font></i><i><font color="#000000">in the <b>word of memory</b></font></i><i><font color="#000000">"</font></i><i><font color="#000000"><b></b></font></i><i><font color="#000000">
+into the "element in array </font></i><b><tt><font color="#cc0000">a2</font></tt></b><i><font color="#000000">
+with an offset that is the value currently contained in the memory location whose address is in </font></i><b><tt><font color="#cc0000">usedPtr</font></tt></b><i><font color="#000000">"</font></i></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(need to do <b><tt><font color="#cc0000">lw</font></tt></b>
+using the <i><u>address</u></i>
+to obtain&nbsp;<b><tt><font color="#cc0000">*intPtr</font></tt></b>, do another
+<b><tt><font color="#cc0000">lw</font></tt></b>
+using&nbsp;<b><tt><font color="#cc0000">*intPtr</font></tt></b><b><tt><font color="#cc0000"></font></tt></b> (just loaded) to obtain <b><tt><font color="#cc0000">*(a1 + </font></tt></b><b><tt><font color="#cc0000">*intPtr)</font></tt></b>, do yet another
+<b><tt><font color="#cc0000">lw</font></tt></b>
+using&nbsp;<b><tt><font color="#cc0000">usedPtr</font></tt></b> to obtain <b><tt><font color="#cc0000">*</font></tt></b><b><tt><font color="#cc0000">usedPtr</font></tt></b>,
+then do
+<b><tt><font color="#cc0000">sw</font></tt></b> to put&nbsp;<b><tt><font color="#cc0000">*(a1 + </font></tt></b><b><tt><font color="#cc0000">*intPtr)</font></tt></b>
+into&nbsp;<b><tt><font color="#cc0000">*(a2 + *usedPtr)</font></tt></b>)</td>
+</tr>
+</tbody></table>
+
+
+
+
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%">
+<hr align="left" size="1" width="50%"></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%"><b><tt><font color="#cc0000">*intPtr</font></tt></b><font color="#000000">
+appearing as an argument <i>in a function call</i> means <i>the value currently
+contained in the <b>word of memory</b></i> is to be passed as that argument</font></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="2%"></td>
+
+<td width="94%">(need to do <b><tt><font color="#cc0000">lw</font></tt></b>
+using the <i><u>address</u></i> to obtain <b><tt><font color="#cc0000">*intPtr</font></tt></b>)</td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td valign="top" width="2%"></td>
+
+<td colspan="5" valign="top" width="96%">
+<hr align="left" size="1" width="50%"></td>
+</tr>
+</tbody></table>
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="2%"></td>
+
+<td colspan="6" valign="top" width="98%"><font color="#000000">Note that
+the function may receive the </font><i><u>address</u></i><font color="#000000">
+through a <i>register</i> (if it comes as <i>1 of the first 4 arguments</i>)
+or through the <i>stack</i> (if it comes as <i>1 of the 5th-and-beyond
+arguments</i>). <br>If received through the stack, it will typically <span style="text-decoration: underline;">need to
+first</span> be loaded (using </font><b><tt><font color="#cc0000">lw</font></tt></b><font color="#000000">)
+into a register to be usable.</font></td>
+</tr>
+</tbody></table><table width="100%"><tbody><tr><td valign="top" width="2%"></td>
+
+<td colspan="6" valign="top" width="98%"></td>
+</tr>
+</tbody></table>
+
+<hr width="100%">Use your browser's <b>Back</b> button to go back to previous
+page. (<a href="http://www.cs.txstate.edu/~lk04">click here to return to
+my homepage</a>)
+<hr align="left">
+</body></html>
