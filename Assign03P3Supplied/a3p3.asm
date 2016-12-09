@@ -339,7 +339,7 @@ PopulateArray1223:
 					# PROLOG:
 					addiu $sp, $sp, -40
 					sw $ra, 36($sp)
-					sw $fp 32($fp)
+					sw $fp 32($sp)
 					addiu $fp, $sp, 40
 					sw $s0, 16($sp)
 					
@@ -351,12 +351,13 @@ PopulateArray1223:
 
 
 #                   *used2Ptr = 0;
-					li $v1, 0		# load 0 into v1
-					sw $v1, 16($fp)		# store 0 into argument 5
+					lw $v1, 16($fp)		# load address of used2Ptr
+					sw $zero, 0($v1)	# store 0 into argument 5
 #                   *used3Ptr = 0;
-					sw $v1, 20($fp)		# store 0 into argument 6
+					lw $v1, 20($fp)		# load address of used3Ptr
+					sw $zero, 0($v1)
 #                   total = 0;
-					move $s0, $v1		# store 0 into total
+					move $s0, $zero		# store 0 into total
 #                   hopPtr1 = a1;
 					move $t1, $a0		# store a1 into hopPtr1
 #                   endPtr1 = a1 + used1;
@@ -388,16 +389,17 @@ else_PA1223:
 					jal PopulateArray1223AuxE
 endI_PA1223:
 #                   ++hopPtr1;
-					addi $t1, $t1, 1	# hopPtr1++
+					addi $t1, $t1, 4	# hopPtr1++
 FTest_PA1223:
 #                   if (hopPtr1 < endPtr1) goto begF_PA1223;
 					blt $t1, $t9, begF_PA1223
 #                   return total/used1;
 					div $s0, $a3 
+					mflo $v0
 					# EPILOG:
-					addiu $sp, $sp, -40
+					
 					lw $ra, 36($sp)
-					lw $fp 32($fp)
+					lw $fp 32($sp)
 					lw $s0, 16($sp)
 					addiu $sp, $sp, 40
 					jr $ra
@@ -417,30 +419,59 @@ PopulateArray1223AuxO:
 # $t9: endPtr3
 # $v1: holder for a value/address
 ###############################################################################
-					####################(18)####################					
+					####################(18)####################
+
 #                   int *hopPtr3,
 #                       *endPtr3;
 					# PROLOG:
+					addiu $sp, $sp, -32
+					sw $ra, 28($sp)
+					sw $fp, 24($sp)
+					addiu $fp, $sp, 32
+					sw $s0, 16($sp)
 					 						# no stack frame needed
 					# BODY:
 #                   hopPtr3 = a3 + *used3Ptr - 1;
+					lw $v1, 0($a1)	# load value of used3Ptr
+					addi $v1, $v1, -1
+					sll $v1, $v1, 2 # multipile by for for indexing
+					add $t1, $a0, $v1	# hopPtr3 = a3 + *used3Ptr - 1;
+
 #                   endPtr3 = a3;
+					move $t9, $a0
 #                   goto WTest_PA1223AO;
+					j WTest_PA1223AO
 begW_PA1223AO:
 #                      if (*hopPtr3 <= target) goto else_PA1223AO;
+					lw $v1, 0($t1)	# load value of hopPtr3
+					ble $v1, $a3, else_PA1223AO 	# if (*hopPtr3 <= target) goto else_PA1223AO
 begI_PA1223AO:
 #                         *(hopPtr3 + 1) = *hopPtr3;
+					sw $v1, 4($t1)
 #                         --hopPtr3;
+					addiu $t1, $t1, -4
 #                      goto endI_PA1223AO;
+					j endI_PA1223AO
 else_PA1223AO:
 #                         goto xitW_PA1223AO;
+					j xitW_PA1223AO
 endI_PA1223AO:
 WTest_PA1223AO:
 #                   if (hopPtr3 >= endPtr3) goto begW_PA1223AO;
+					bge $t1, $t9, begW_PA1223AO
 xitW_PA1223AO:
 #                   *(hopPtr3 + 1) = target;
+					sw $a3, 4($t1)		# store target into hopPtr3 + 1 index
 #                   ++(*used3Ptr);
+					lw $v1, 0($a1)		# load value of used3Ptr
+					addi $v1, $v1, 1	# increase by 1
+					sw $v1, 0($a1)		# store back into used3Ptr
 					# EPILOG:
+					lw $s0, 16($sp)				# restore $s0 (callee-saved)
+					lw $fp, 24($sp)
+					lw $ra, 28($sp)
+					addiu $sp, $sp, 32
+					jr $ra
 #}
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
@@ -462,32 +493,61 @@ PopulateArray1223AuxE:
 #                       *hopPtr21,
 #                       *endPtr2;
 					# PROLOG:
+					addiu $sp, $sp, -32
+					sw $ra, 28($sp)
+					sw $fp, 24($sp)
+					addiu $fp, $sp, 32
+					sw $s0, 16($sp)	
 					
 					# BODY:
 #                   hopPtr2 = a2;
+					move $t1, $a0		# copy a2 into hopPtr2
 #                   endPtr2 = a2 + *used2Ptr;
+					lw $v1, 0($a1)		# load value at used2Ptr
+					add $t9, $t1, $v1	# add a2 and value at used2Ptr
 #                   goto WTest1_PA1223AE;
+					j WTest1_PA1223AE
 begW1_PA1223AE:
 #                      if (*hopPtr2 < target) goto else_PA1223AE;
+					lw $v1, 0($t1)		# laod value hopPtr2 points to
+					blt $v1, $a2, else_PA1223AE 	# branch less than target
 begI_PA1223AE:
 #                         hopPtr21 = endPtr2;
+					move $s0, $t9		# copy endPtr2 into hopPtr21
 #                         goto WTest2_PA1223AE;
+					j WTest2_PA1223AE
 begW2_PA1223AE:
 #                            *hopPtr21 = *(hopPtr21 - 1);
+					lw $v1, -4($s0)		# load value at hopPtr21 - 1 into temp
+					sw $v1, 0($s0)		# store value into hopPtr21 pointing location
 #                            --hopPtr21;
+					addi $s0, $s0, -4	# hopPtr21 - 1
 WTest2_PA1223AE:
 #                         if (hopPtr21 > hopPtr2) goto begW2_PA1223AE;
+					bgt $s0, $t1, begW2_PA1223AE
 					
 #                         goto xitW1_PA1223AE;
+					j xitW1_PA1223AE
 else_PA1223AE:
 #                         ++hopPtr2;
+					addi $t1, $t1, 4	# ++hopPtr2
 endI_PA1223AE:
 WTest1_PA1223AE:
 #                   if (hopPtr2 < endPtr2) goto begW1_PA1223AE;
+					blt $t1, $t9, begW1_PA1223AE
 xitW1_PA1223AE:
 #                   *hopPtr2 = target;
+					sw $a2, 0($t1)		# store value of target where hopPtr2 points
 #                   ++(*used2Ptr);
+					lw $v1, 0($a1)		# load value into temp
+					addi $v1, $v1, 1	# increase value by 1
+					sw $v1, 0($a1)
 					# EPILOG:
+					lw $s0, 16($sp)				# restore $s0 (callee-saved)
+					lw $fp, 24($sp)
+					lw $ra, 28($sp)
+					addiu $sp, $sp, 32
+					jr $ra
 #}
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
@@ -578,42 +638,80 @@ MergeCopy2321:
 					 						# no stack frame needed
 					# BODY:
 #                   hopPtr1 = a1;
+					move $t1, $a1 		# copy a1 into hopPtr1
 #                   hopPtr2 = a2;
+					move $t2, $a2 		# copy a2 into hopPtr2
 #                   hopPtr3 = a3;
+					move $t3, $a3 		# copy a3 into hopPtr3
 #                   endPtr2 = a2 + *used2Ptr;
+					lw $t8, 0($a0)		# load value of used2Ptr
+					add $t8, $t2, $t8	# add value of used2Ptr and a2
 #                   endPtr3 = a3 + *used3Ptr;
+					lw $t0, 16($sp)
+					lw $t9, 0($t0)		# load value of used2Ptr
+					add $t9, $t3, $t9	# add value of used2Ptr and a2
 #                   goto WTest1_MC2321;
+					j WTest1_MC2321
 begW1_MC2321:
 #                      if (*hopPtr2 >= *hopPtr3) goto else_MC2321;
+					lw $t0, 0($t2)		# load value at hopPtr2
+					lw $v1, 0($t3)		# load value at hopPtr3
+					bge $t0, $v1, else_MC2321
 begI_MC2321:
 #                         *hopPtr1 = *hopPtr2;
+					lw $v1, 0($t2)		# load value at hopPtr2
+					sw $v1, 0($t1)		# save value at hopPtr2 to hopPtr1
+
 #                         ++hopPtr2;
+					addi $t2, $t2, 4	# ++hopPtr2
 #                      goto endI_MC2321;
+					j endI_MC2321
 else_MC2321:
 #                         *hopPtr1 = *hopPtr3;
+					lw $v1, 0($t3)		# load value at hopPtr3
+					sw $v1, 0($t1)		# save value at hopPtr3 to hopPtr1
+
 #                         ++hopPtr3;
+					addi $t3, $t3, 4	# ++hopPtr3
 endI_MC2321:
 #                      ++hopPtr1;
+					addi $t1, $t1, 4	# ++hopPtr1
 WTest1_MC2321:
 #                   if (hopPtr2 >= endPtr2) goto xitW1_MC2321;
+					bge $t2, $t8, xitW1_MC2321
 #                   if (hopPtr3 < endPtr3) goto begW1_MC2321;
+					bge $t3, $t9, begW1_MC2321
 xitW1_MC2321:
 
 #                   goto WTest2_MC2321;
+					j WTest2_MC2321
 begW2_MC2321:
 #                      *hopPtr1 = *hopPtr2;
+					lw $v1, 0($t2)		# load value at hopPtr2
+					sw $v1, 0($t1)		# save value at hopPtr2 to hopPtr1
 #                      ++hopPtr2;
+					addi $t2, $t2, 4
 #                      ++hopPtr1;
+					addi $t1, $t1, 4
 WTest2_MC2321:
 #                   if (hopPtr2 < endPtr2) goto begW2_MC2321;
+					blt $t2, $t8, begW2_MC2321
 
 #                   goto WTest3_MC2321;
+					j WTest3_MC2321
 begW3_MC2321:
 #                      *hopPtr1 = *hopPtr3;
+					lw $v1, 0($t3)		# load value at hopPtr3
+					sw $v1, 0($t1)		# save value at hopPtr3 to hopPtr1
 #                      ++hopPtr3;
+					addi $t3, $t3, 4	# ++hopPtr3 
 #                      ++hopPtr1;
+					addi $t1, $t1, 4	# ++hopPtr1
 WTest3_MC2321:
 #                   if (hopPtr3 < endPtr3) goto begW3_MC2321;
+					blt $t3, $t9, begW3_MC2321
+
+					jr $ra
 #}
 
 
@@ -645,31 +743,65 @@ LtMeanGtMeanCopy1223:
 					 						# no stack frame needed
 					# BODY:
 #                   hopPtr1 = a1;
+					move $t1, $a1 		# copy a1 into hopPtr1
 #                   hopPtr2 = a2;
+					move $t2, $a2 		# copy a2 into hopPter2
 #                   hopPtr3 = a3;
+					move $t3, $a3 		# copy a3 into hopPtr3
 #                   endPtr1 = a1 + used1;
+					lw $t9, 16($sp)		# load used1
+					add $t9, $t9, $a1 	# add used1 and a1
 #                   *used2Ptr = 0;
+					lw $t0, 20($sp)		# load address from used2Ptr
+					sw $zero, 0($t0)	# store 0 where used2Ptr points
 #                   *used3Ptr = 0;
+					lw $t0, 24($sp)		# load address from used3Ptr
+					sw $zero, 0($t0)	# store 0 where used3Ptr points
 #                   goto WTest_LMGMC1223;
+					j WTest_LMGMC1223
 begW_LMGMC1223:
 #                      target = *hopPtr1;
+					lw $t0, 0($t1)
+					lw $t5, 0($t0)		# load value hopPtr1 points to
 #                      if (target >= mean) goto else1_LMGMC1223;
+					bge $t5, $a0, else1_LMGMC1223
 begI1_LMGMC1223:
 #                         *hopPtr2 = target;
+					lw $t0, 0($t2)		# load address from hopPtr2
+					sw $t5, 0($t0)		# store target at address hopPtr2 points
 #                         ++(*used2Ptr);
+					lw $t0, 20($sp)		# load address from used2Ptr
+					lw $v1, 0($t0)		# load value at addres of used2Ptr
+					addi $v1, $v1, 1		# ++(*used2Ptr)
+					sw $v1, 0($t0)		# store 0 where used2Ptr points
 #                         ++hopPtr2;
+					addi $t2, $t2, 4 	# ++hopPtr2
 #                      goto endI1_LMGMC1223;
+					j endI1_LMGMC1223
 else1_LMGMC1223:
 #                         if (target <= mean) goto endI2_LMGMC1223;
+					ble $t5, $a0, endI2_LMGMC1223
 begI2_LMGMC1223:
 #                            *hopPtr3 = target;
+					lw $t0, 0($t3)		# load address
+					sw $t5, 0($t0)		# store target at address
+
 #                            ++(*used3Ptr);
+					lw $t0, 24($sp)		# load address at used2Ptr
+					lw $v1, 0($t0)		# load value at address
+					addi $v1, $v1, 1	# ++(*used3Ptr)
+					sw $v1, 0($t0)		# store back at address used2Ptr
 #                            ++hopPtr3;
+					addi $t3, $t3, 4	# ++hopPtr3
 endI2_LMGMC1223:
 endI1_LMGMC1223:
 #                      ++hopPtr1;
+					addi $t1, $t1, 4 	# ++hopPtr1
 WTest_LMGMC1223:
 #                   if (hopPtr1 < endPtr1) goto begW_LMGMC1223;
+					blt $t1,$t9, begW_LMGMC1223
+
+					jr $ra
 #}
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
