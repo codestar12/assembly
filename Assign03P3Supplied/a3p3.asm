@@ -112,7 +112,17 @@ begI_m:
 					addi $a2, $sp, 77
 					jal ShowArrayLabeled
 #                         ProcArrays(mean, a1, a2, a3, used1, &used2, &used3);
-					####################(10)####################					
+					####################(10)####################
+					move $a0, $s0
+					addi $a1, $sp, 192	# load a1 into 2nd arg
+					addi $a2, $sp, 240	# load a2 into 3rd arg
+					addi $a3, $sp, 288	# load a3 into 4th arg	
+					lw $t0, 188($sp)	# load used1 
+					sw $t0, 16($sp)		# save used1  in stack for call
+					addi $t0, $sp, 184	# load used2 pointer
+					sw $t0, 20($sp)		# save used2 pointer in stack for call
+					addi $t0, $sp, 180	# load used3 pointer
+					sw $t0, 20($sp)		# save used3 pointer in stack for call				
 					jal ProcArrays
 #                         ShowArrayLabeled(a1, used1, procA1Str);
 					addi $a0, $sp, 192
@@ -576,10 +586,14 @@ ProcArrays:
 					
 					# BODY:
 #                   MergeCopy2321(used2Ptr, a1, a2, a3, used3Ptr);
-					####################(3)####################					
+					####################(3)####################
+					lw $a0, 20($fp)		# load used2Ptr into first argument
+					lw $v1, 24($fp)		# load used3Ptr from caller stack
+					sw $v1, 16($fp)		# load used3Ptr into 5 argument stack spot			
 					jal MergeCopy2321
 #                   LtMeanGtMeanCopy1223(mean, a1, a2, a3, used1, used2Ptr, used3Ptr);
-					####################(10)####################					
+					####################(10)####################
+					lw $a0, 40($sp)		# reload mean					
 					jal LtMeanGtMeanCopy1223
 					# EPILOG:
 					lw $fp, 32($sp)				
@@ -645,11 +659,13 @@ MergeCopy2321:
 					move $t3, $a3 		# copy a3 into hopPtr3
 #                   endPtr2 = a2 + *used2Ptr;
 					lw $t8, 0($a0)		# load value of used2Ptr
+					sll $t8, $t8, 2		# multiply by 4 for indexing
 					add $t8, $t2, $t8	# add value of used2Ptr and a2
 #                   endPtr3 = a3 + *used3Ptr;
-					lw $t0, 16($sp)
-					lw $t9, 0($t0)		# load value of used2Ptr
-					add $t9, $t3, $t9	# add value of used2Ptr and a2
+					
+					lw $t9, 16($sp)		# load value of used3Ptr
+					sll $t8, $t8, 2		# multiply by 4 for indexing
+					add $t9, $t3, $t9	# add value of used3Ptr and a3
 #                   goto WTest1_MC2321;
 					j WTest1_MC2321
 begW1_MC2321:
